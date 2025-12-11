@@ -54,7 +54,7 @@ async def create_address(data: PhoneAddressCreate, redis: Redis = Depends(get_re
     This prevents a race condition
     """
     logger.info(f"Attempt to create a record: {data.phone}")
-    # Returns True if the key has been set, False if the key already exists.
+    # returns True if set, False if key already exists
     is_created = await redis.set(data.phone, data.address, nx=True)
 
     if not is_created:
