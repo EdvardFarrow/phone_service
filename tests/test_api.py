@@ -68,3 +68,11 @@ async def test_delete_phone(client):
     
     get_response = await client.get(f"/phones/{VALID_PHONE}")
     assert get_response.status_code == status.HTTP_404_NOT_FOUND
+    
+async def test_create_phone_invalid_format(client):
+    """Phone format validation test (422)"""
+    payload = {"phone": "not-a-number", "address": "Moscow"}
+    
+    response = await client.post("/phones", json=payload)
+    
+    assert response.status_code == status.HTTP_422_UNPROCESSABLE_CONTENT 

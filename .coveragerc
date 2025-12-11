@@ -1,0 +1,4 @@
+[run]
+omit =
+    app/deps.py
+    app/__init__.py

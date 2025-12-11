@@ -48,4 +48,8 @@ logs:
 	$(DOCKER_COMPOSE) logs -f
 
 test:
-	$(PYTHON) -m pytest -v
+	$(PYTHON) -m pytest -v --cov=app --cov-report=term-missing
+
+badge:
+	$(PYTHON) -m pytest --cov=app
+	coverage-badge -o coverage.svg -f	

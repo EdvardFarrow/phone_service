@@ -15,4 +15,4 @@ async def get_redis() -> AsyncGenerator[redis.Redis, None]:
         yield client
     finally:
         # Close the client (return the connection to the pool), but do NOT close the pool itself
-        await client.aclose()
+        await client.aclose()  
