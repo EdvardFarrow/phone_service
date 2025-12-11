@@ -4,12 +4,12 @@ from .deps import get_redis
 from .schemas import PhoneAddressCreate, PhoneAddressUpdate, PhoneAddressResponse
 import logging
 import sys
-from app.config import settings
+
 
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[logging.StreamHandler(sys.stdout)] 
+    handlers=[logging.StreamHandler(sys.stdout)],
 )
 
 logger = logging.getLogger(__name__)
@@ -58,7 +58,7 @@ async def create_address(data: PhoneAddressCreate, redis: Redis = Depends(get_re
     is_created = await redis.set(data.phone, data.address, nx=True)
 
     if not is_created:
-        logger.warning(f"A record with this phone number already exists.")
+        logger.warning(f"A record with this phone number already exists. {data.phone}")
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail="A record with this phone number already exists. Use PUT to update.",

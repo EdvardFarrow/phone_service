@@ -33,9 +33,7 @@ clean:
 	find . -type f -name "*.pyc" -delete
 
 lint:
-	flake8 app/
-
-format:
+	flake8 app/ 
 	black app/
 
 up:
